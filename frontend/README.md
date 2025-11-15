@@ -6,9 +6,47 @@ Next.js frontend application for the Mini-AGI orchestrator system with chat UI a
 
 - **Chat Interface** - Built with @assistant-ui/react for smooth conversation flow
 - **Agent Timeline** - Visualize orchestration steps, agent decisions, and tool usage
+- **Professional Animations** - Smooth, performant animations powered by Framer Motion
 - **Responsive Design** - Mobile-first design using Tailwind CSS
 - **Type Safe** - Full TypeScript coverage for reliability
 - **Backend Integration** - Custom adapter for Python/FastAPI backend
+
+## Animation Features
+
+The application includes professional animations using **Framer Motion** for a polished user experience:
+
+### Page Transitions
+- **Smooth page load** - Fade and slide animations on initial load
+- **Component orchestration** - Coordinated animations between chat and events panel
+- **Responsive transitions** - Optimized for all screen sizes
+
+### Events Panel Animations
+- **Staggered list** - Events appear sequentially with smooth timing
+- **Event cards** - Slide in from left with subtle scale effect
+- **Badge animations** - Spring-based pop effect for action badges
+- **Separator growth** - Animated dividers between events
+- **Hover interactions** - Scale effects on tool names and delegations
+
+### Header Animations
+- **Slide down** - Header smoothly slides into view
+- **Sequential text** - Title and subtitle appear in sequence
+- **Backdrop blur** - Glassmorphism effect with backdrop filter
+
+### Micro-Interactions
+- **Badge hover** - Scale up on hover (1.1x), scale down on tap (0.95x)
+- **Code tags** - Subtle scale on hover for tool names
+- **Smooth transitions** - All interactions use easing functions
+
+### Loading States
+- **Skeleton components** - Shimmer effect for loading states
+- **Event skeletons** - Placeholder animations for incoming events
+- **Pulse animations** - Loading indicators with smooth opacity changes
+
+### Performance
+- **GPU-accelerated** - Transform and opacity animations only
+- **Layout animations** - Automatic layout transitions with Framer Motion
+- **Optimized rendering** - AnimatePresence for mount/unmount animations
+- **Reduced motion** - Respects user's motion preferences
 
 ## Prerequisites
 
@@ -72,11 +110,13 @@ frontend/
 │       ├── card.tsx
 │       ├── scroll-area.tsx
 │       ├── badge.tsx
-│       └── separator.tsx
+│       ├── separator.tsx
+│       └── skeleton.tsx    # Animated loading skeletons
 ├── lib/
 │   ├── runtime/
 │   │   ├── backendAdapter.ts      # ChatModelAdapter for backend
 │   │   └── MyRuntimeProvider.tsx  # AssistantRuntimeProvider wrapper
+│   ├── animations.ts       # Framer Motion animation variants
 │   └── utils.ts            # Utility functions (cn)
 ├── package.json            # Dependencies
 ├── tsconfig.json           # TypeScript config
@@ -104,6 +144,7 @@ npm run type-check       # Run TypeScript type checking
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript 5
 - **Chat UI:** @assistant-ui/react
+- **Animations:** Framer Motion 11
 - **Styling:** Tailwind CSS 3
 - **Components:** shadcn/ui + Radix UI
 - **Font:** Inter (via next/font)

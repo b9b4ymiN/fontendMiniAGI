@@ -1,7 +1,9 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Thread, useThreadMessages } from "@assistant-ui/react";
 import { EventsPanel } from "./EventsPanel";
+import { pageTransition, slideInLeft, slideInRight, headerSlideDown } from "@/lib/animations";
 
 type Event = {
   step: number;
@@ -23,24 +25,64 @@ export function ChatShell() {
   const events = (lastAssistantMessage?.metadata?.events as Event[]) ?? [];
 
   return (
-    <div className="flex h-screen w-full">
+    <motion.div
+      className="flex h-screen w-full"
+      variants={pageTransition}
+      initial="hidden"
+      animate="visible"
+    >
       {/* Main chat area */}
-      <div className="flex-1 flex flex-col border-r">
-        <header className="border-b px-4 py-3">
-          <h1 className="text-lg font-semibold">Mini-AGI Chat</h1>
-          <p className="text-sm text-muted-foreground">
+      <motion.div
+        className="flex-1 flex flex-col border-r"
+        variants={slideInLeft}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Header with animation */}
+        <motion.header
+          className="border-b px-4 py-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+          variants={headerSlideDown}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1
+            className="text-lg font-semibold"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+          >
+            Mini-AGI Chat
+          </motion.h1>
+          <motion.p
+            className="text-sm text-muted-foreground"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
+          >
             Powered by Orchestrator + Agents + Tools
-          </p>
-        </header>
-        <div className="flex-1 overflow-hidden">
+          </motion.p>
+        </motion.header>
+
+        {/* Chat thread area */}
+        <motion.div
+          className="flex-1 overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
           <Thread />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Events panel - hide on mobile, show on md+ */}
-      <div className="hidden md:flex md:w-80 lg:w-96 flex-col">
+      <motion.div
+        className="hidden md:flex md:w-80 lg:w-96 flex-col"
+        variants={slideInRight}
+        initial="hidden"
+        animate="visible"
+      >
         <EventsPanel events={events} />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
